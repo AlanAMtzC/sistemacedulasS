@@ -3,7 +3,7 @@ import logo from './logo.svg';
 import logoo from './images/easewhite2.png';
 import logo2 from './images/easewhite.png';
 import './App.scss';
-import React from 'react';
+import React,{useState} from 'react';
 import { Layout, Menu, Breadcrumb } from 'antd';
 import {
   DesktopOutlined,
@@ -16,21 +16,18 @@ import {
 const { Header, Content, Footer, Sider } = Layout;
 const { SubMenu } = Menu;
 
-class SiderDemo extends React.Component {
-  state = {
-    collapsed: false,
-  };
-
-  onCollapse = collapsed => {
+function SiderDemo (){
+  const [collapsed, setCollapsed]= useState(false);
+  
+  const onCollapse = () => {
     console.log(collapsed);
-    this.setState({ collapsed });
+    setCollapsed(!collapsed);
   };
 
-  render() {
-    const { collapsed } = this.state;
+  
     return (
       <Layout style={{ minHeight: '100vh' }}>
-        <Sider collapsible collapsed={collapsed} onCollapse={this.onCollapse}>
+        <Sider collapsible collapsed={collapsed} onCollapse={onCollapse}>
           <div  style={{
                         height: 64,
                         backgroundImage: `url(${collapsed ? logoo : logo2})`,
@@ -92,6 +89,6 @@ class SiderDemo extends React.Component {
       </Layout>
     );
   }
-}
+
 
 export default SiderDemo;
